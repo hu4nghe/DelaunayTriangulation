@@ -7,7 +7,7 @@
 #include "List.h"  /*which includes stdlib.h*/
 #include "Graph.h" /*which includes stdbool.h*/
 #include "Graph.c" /*which includes math.h and stdio.h*/
-#include "delaunay.h" /* which defined the lists that we will use.*/
+#include "Delaunay.h" /* which defined the lists that we will use.*/
 
 /**
  * Define three vertices of the super triangle.
