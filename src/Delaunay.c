@@ -1,7 +1,7 @@
 /**
- * this is the algorithm part of the project NF06 "triangulation de Delaunay".
- * using algorithm of Bowyer-Watson.
- * by HUANG He,TC04.
+ * This is the algorithm part of the project NF06 "triangulation de Delaunay".
+ * Using Bowyer-Watson algorithm.
+ * by HUANG He.
  */
 
 #include "List.h"  /*which includes stdlib.h*/
