@@ -3,10 +3,9 @@
         {
             "name": "Linux",
             "includePath": [
-                "${workspaceFolder}/**",
                 "${workspaceFolder}/include"
             ],
-            "defines": [],
+            "defines" :[],
             "compilerPath": "/usr/bin/gcc",
             "intelliSenseMode": "linux-gcc-x64"
         }
