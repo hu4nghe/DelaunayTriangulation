@@ -192,11 +192,7 @@ int main()
     /* Create a iterator of the listPoint and listTriangle. */
     List_point_Node* iterPoint = listPoint.head;
     List_triangle_Node* iterTriangle = listTriangle.head;
-
-    //test
-    int pointCount = 1;
     
-
     /* iterate every point in the point set. */
     while(iterPoint != NULL)
     {
