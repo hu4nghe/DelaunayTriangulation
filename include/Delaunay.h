@@ -2,8 +2,21 @@
  * this is the api of the algorithme "triagulation de delaunay"
  */
 
-#include "List.h"  /*which includes stdlib.h*/
-#include "Graph.h"/*which includes stdbool.h*/
+
+#include "math.h"
+
+/**
+	Macro list definition 
+	It includes stdlib.h
+*/
+#include "List.h"  
+
+/**
+	Definition of graphics : point, line, triangle, cercle.
+	It includes stdbool.h and stdio.h
+*/
+
+#include "Graph.h"
 
 /**
  * inplementation of list using macro

@@ -10,6 +10,8 @@
  */
 #include "stdbool.h"
 #include "stdio.h"
+#include "math.h"
+#include "float.h"
 
 typedef struct point
 {

@@ -1,6 +1,4 @@
 #include "Graph.h"
-#include "math.h"
-#include "float.h"
 
 /**
  * A constructor of object point.

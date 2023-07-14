@@ -4,9 +4,6 @@
  * by HUANG He.
  */
 
-#include "List.h"  /*which includes stdlib.h*/
-#include "Graph.h" /*which includes stdbool.h*/
-#include "Graph.c" /*which includes math.h and stdio.h*/
 #include "Delaunay.h" /* which defined the lists that we will use.*/
 
 /**
