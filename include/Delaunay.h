@@ -2,9 +2,6 @@
  * this is the api of the algorithme "triagulation de delaunay"
  */
 
-
-#include "math.h"
-
 /**
 	Macro list definition 
 	It includes stdlib.h

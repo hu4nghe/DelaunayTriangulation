@@ -16,7 +16,7 @@ void pointInit(point* p,double x, double y)
 /**
  * A constructor of object Triangle by define his 3 vertex.
  * 
- * @param p The triangle himself.
+ * @param t The triangle himself.
  * @param a A vertex of triangle.
  * @param b A vertex of triangle.
  * @param c A vertex of triangle.
@@ -35,7 +35,7 @@ bool triangleInitThreePoint(triangle* t,const point a, const point b, const poin
 /**
  * A constructor of object Triangle by define his 3 vertex.
  * 
- * @param p The triangle himself.
+ * @param t The triangle himself.
  * @param a A vertex of triangle.
  * @param b A vertex of triangle.
  * @param c A vertex of triangle.
@@ -74,6 +74,7 @@ bool circleInit(circle* c,point centre,double radius)
 /**
  * a constructor of object edge
  * 
+ * @param edge himself
  * @param edgepoint1 a point
  * @param edgepoint2 a point
  * 
@@ -94,11 +95,25 @@ bool edgeInit(edge* e, point edgePoint1, point edgePoint2)
     
 }
 
-
+/**
+ * @brief printing a point in .geo format
+ * 
+ * @param mshOut *FILE output 
+ * @param p the point to print
+ * @param num printed point count
+ */
 void printPoint(FILE* mshOut,const point p,int num)
 {
     fprintf(mshOut,"Point (%d) = {%f,%f,0};\n",num,p.x,p.y);
 }
+
+/**
+ * @brief printing a triangle in .geo format
+ * 
+ * @param mshOut *FILE output 
+ * @param t the triangle to print
+ * @param num printed point count
+ */
 void printTriangle(FILE* mshOut,const triangle t,int num)
 {
     printPoint(mshOut,t.a,3*num-2);

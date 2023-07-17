@@ -5,9 +5,6 @@
 #ifndef _GRAPH_H_
 #define _GRAPH_H_
 
-/**
- * Using stdboll.h for bool return value.
- */
 #include "stdbool.h"
 #include "stdio.h"
 #include "math.h"
