@@ -2,13 +2,14 @@
     "tasks": [
         {
             "type": "cppbuild",
-            "label": "C/C++: gcc-10 生成活动文件",
+            "label": "gcc-10 生成静态库",
             "command": "/usr/bin/gcc-10",
             "args": [
                 "-fdiagnostics-color=always",
                 "-g",
+				"-I/home/huanghe/GithubRepo/DelaunayTriangulation/include",
                 "${file}",
-                "-o",
+                "-c",
                 "${fileDirname}/${fileBasenameNoExtension}"
             ],
             "options": {
