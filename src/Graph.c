@@ -1,5 +1,6 @@
 #include "Graph.h"
-
+#include "stdbool.h" /* which defined the bool type.*/
+#include "math.h"
 /**
  * A constructor of object point.
  * 

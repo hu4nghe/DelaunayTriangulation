@@ -5,6 +5,7 @@
  */
 
 #include "Delaunay.h" /* which defined the lists that we will use.*/
+#include "stdbool.h" /* which defined the bool type.*/
 
 /**
  * Define three vertices of the super triangle.
