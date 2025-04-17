@@ -36,14 +36,14 @@ typedef struct circle
 } circle;
 
 
-void pointInit(point* p,double x, double y);
-bool triangleInitThreePoint(triangle* t,point a, point b,point c);
-bool triangleInitPointEdge(triangle* t,const point a, const edge e);
-bool circleInit(circle* c,point centre,double radius);
+void pointInit(point* p, double x, double y);
+bool triangleInitThreePoint(triangle* t, point a, point b, point c);
+bool triangleInitPointEdge(triangle* t, const point a, const edge e);
+bool circleInit(circle* c, point centre, double radius);
 bool edgeInit(edge* e, point edgePoint1, point edgePoint2);
 
-void printPoint(FILE* mshOut,const point p,int num);
-void printTriangle(FILE* mshOut,const triangle t,int num);
+void printPoint(FILE* mshOut, const point p, const int num);
+void printTriangle(FILE* mshOut, const triangle t, const int num);
 
 double Distance(const point a, const point b);
 double Slope(const point a, const point b);
