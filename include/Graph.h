@@ -1,14 +1,19 @@
 /**
+ * @file Graph.h
+ * @author HUANG He (he.huang@utt.fr)
+ * @brief
  * This file is created to realize the point and triangle object some fonctions with them.
  * These objects are used to represent points and triangles in two-dimensional space.
+ * @version 1.0
+ * @date 2022-12-20
+ * 
  */
-#ifndef _GRAPH_H_
-#define _GRAPH_H_
 
-#include "stdbool.h"
+#ifndef GRAPH_H_
+#define GRAPH_H_
+
 #include "stdio.h"
-#include "math.h"
-#include "float.h"
+#include "stdbool.h"
 
 typedef struct point
 {
@@ -55,4 +60,4 @@ bool isEqualPoint(const point a, const point b);
 bool isEqualEdge(const edge e1,const edge e2);
 bool isInCircle(const point p, const circle c);
 
-#endif /* _GRAPH_H_ */
+#endif /* GRAPH_H_ */

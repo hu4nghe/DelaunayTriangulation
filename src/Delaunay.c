@@ -1,27 +1,32 @@
 /**
+ * @file Delaunay.c
+ * @author HUANG He (he.huang@utt.fr)
+ * @brief
  * This is the algorithm part of the project NF06 "triangulation de Delaunay".
  * Using Bowyer-Watson algorithm.
- * by HUANG He.
+ * @version 1.0
+ * @date 2022-12-20
+ * 
  */
 
 #include "Delaunay.h" /* which defined the lists that we will use.*/
-#include "stdbool.h" /* which defined the bool type.*/
 
 /**
  * Define three vertices of the super triangle.
  * which are used in the function "superTriangle" and "main".
  */
-point a,b,c;
+point a, b, c;
 
 point inputPoint()
 {
     point p;
-    scanf("%lf%lf",&(p.x),&(p.y));
+    scanf("%lf%lf", &(p.x), &(p.y));
     return p;
 }
 
 /**
- * this fonction accept a point set, calculate a super triangle who includes all the points in this set.
+ * @brief
+ * this fonction calculate a super triangle who includes all the points in this set.
  * It also adds the vertices of this super triangle into the point set.
  * 
  * @param listPoint the set of points
@@ -48,25 +53,26 @@ triangle superTriangle(List_point_* listPoint)
     }
     double xAvg = (xMax + xMin) / 2;
 
-    point p1,p2;
-    pointInit(&p1,xAvg,yMax);
-    pointInit(&p2,xMax,yMin);
+    point p1, p2;
+    pointInit(&p1, xAvg, yMax);
+    pointInit(&p2, xMax, yMin);
 
-    double k = Slope(p1,p2);
-    pointInit(&a,xAvg, k * (xAvg - xMax) + yMax);
-    pointInit(&b,xMax + (yMin - yMax - 1) / k + 1, yMin - 1);
-    pointInit(&c,2 * xAvg - b.x, yMin - 1);
+    double k = Slope(p1, p2);
+    pointInit(&a, xAvg, k * (xAvg - xMax) + yMax);
+    pointInit(&b, xMax + (yMin - yMax - 1) / k + 1, yMin - 1);
+    pointInit(&c, 2 * xAvg - b.x, yMin - 1);
     
     triangle SuperTri;
-    triangleInitThreePoint(&SuperTri,a,b,c);
-    List_point_push_back(listPoint,a);
-    List_point_push_back(listPoint,b);
-    List_point_push_back(listPoint,c);
+    triangleInitThreePoint(&SuperTri, a, b, c);
+    List_point_push_back(listPoint, a);
+    List_point_push_back(listPoint, b);
+    List_point_push_back(listPoint, c);
 
     return SuperTri;
 }
 
  /** 
+  * @brief
   * This function will remove all duplicated edges in the list.
   * 
   * @param list the edge list that we want to operate. 
@@ -101,7 +107,6 @@ void removeDuplicatedEdges(List_edge_* listEdge)
         }
         else
             iterEdge1 = iterEdge1->next;
-        
     }
     return;
 }
@@ -114,10 +119,10 @@ void removeDuplicatedEdges(List_edge_* listEdge)
   */
 void pushTriangleEdges(const triangle t, List_edge_* listEdge)
 {
-    edge A,B,C;//to present 3 edge of a triangle in the listTriangle*
-    edgeInit(&A,t.a,t.b);
-    edgeInit(&B,t.b,t.c);
-    edgeInit(&C,t.c,t.a);
+    edge A, B, C;//to present 3 edge of a triangle in the listTriangle*
+    edgeInit(&A, t.a, t.b);
+    edgeInit(&B, t.b, t.c);
+    edgeInit(&C, t.c, t.a);
     List_edge_push_back(listEdge,A);
     List_edge_push_back(listEdge,B);
     List_edge_push_back(listEdge,C);
@@ -148,16 +153,15 @@ int main()
 
     /*Scan the number of points.*/
     int N = 0;
-    scanf("%d",&N);
+    scanf("%d", &N);
 
     /*create the listPoint with first scaned element.*/
     List(List_point_,listPoint,inputPoint());
 
     /*Do N-1 times scan because we have already scan once when creating the listPoint.*/
     for(int i = 1; i < N; i++)
-    {
         List_point_push_back(&listPoint,inputPoint());
-    }
+    
     
     /* end of input*/
 
@@ -170,7 +174,7 @@ int main()
         FILE * mshOut = fopen("delaunay.geo","w");
 
         triangle t;
-        triangleInitThreePoint(&t,listPoint.head->data,listPoint.head->next->data,listPoint.head->next->next->data);
+        triangleInitThreePoint(&t, listPoint.head->data, listPoint.head->next->data, listPoint.head->next->next->data);
         
         printTriangle(mshOut,t,1);
 

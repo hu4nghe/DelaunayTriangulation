@@ -1,14 +1,17 @@
 /**
+ * @file List.h
+ * @author HUANG He (he.huang@utt.fr)
+ * @brief
  * This file is created to realize a linked list with a simulation of template in C.
- * The main usage of this linked list is to stock points and triangles in the final project NF06.
+ * Stock points and triangles in the delaunay triangulation lib.
+ * @version 1.0
+ * @date 2022-12-20
+ * 
  */
 
-#ifndef _LIST_H_
-#define _LIST_H_
+#ifndef LIST_H_
+#define LIST_H_
 
-/**
- * Using stdlib.h for memory allocation.
- */
 #include "stdlib.h"
 
 /**
@@ -107,4 +110,4 @@
         LIST.head -> next = NULL; \
         LIST.tail = NULL; \
 
-#endif /* _LIST_H_ */
+#endif /* LIST_H_ */

@@ -1,6 +1,20 @@
+/**
+ * @file Graph.c
+ * @author HUANG He (he.huang@utt.fr)
+ * @brief
+ * This file is created to realize the point and triangle object some fonctions with them.
+ * These objects are used to represent points and triangles in two-dimensional space.
+ * @version 1.0
+ * @date 2022-12-20
+ * 
+ */
+
 #include "Graph.h"
+
 #include "stdbool.h" 
 #include "math.h"
+#include "float.h" // for DBL_EPSILON
+
 /**
  * @brief 
  * A constructor of object point.
