@@ -1,19 +1,19 @@
-cmake_minimum_required(VERSION 3.20)
+cmake_minimum_required(VERSION 3.28)
 project(DelaunayTriangulation VERSION 1.0)
 
-# Specify C23 standard
-set(CMAKE_C_STANDARD 99)
+set(CMAKE_C_STANDARD 23)
 set(CMAKE_C_STANDARD_REQUIRED ON)
+set(CMAKE_C_EXTENSIONS OFF)
 
-# Find all header and source files automatically
-aux_source_directory(src SOURCES)
-aux_source_directory(include HEADERS)
+add_library(Graph STATIC src/Graph.c)
 
-# Create the executable
-add_executable(${PROJECT_NAME} ${SOURCES} ${HEADERS})
+add_executable(DelaunayExecutable src/Delaunay.c)
 
-# Add include directory
-target_include_directories(${PROJECT_NAME} PRIVATE ${CMAKE_CURRENT_SOURCE_DIR}/include)
+target_link_libraries(DelaunayExecutable PRIVATE Graph)
 
-# Link against the math library (libm)
-target_link_libraries(${PROJECT_NAME} PRIVATE m)
+target_include_directories(Graph PUBLIC ${CMAKE_CURRENT_SOURCE_DIR}/include)
+target_include_directories(DelaunayExecutable PRIVATE ${CMAKE_CURRENT_SOURCE_DIR}/include)
+
+if(UNIX)
+    target_link_libraries(DelaunayExecutable PRIVATE m)
+endif()
