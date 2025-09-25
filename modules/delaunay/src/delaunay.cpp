@@ -17,12 +17,9 @@ int main()
 {
     try 
     {
-        std::filesystem::path csvfile = "points.csv"; 
-        auto coords = read_csv_coords(csvfile);
+        auto coords = read_csv_coords("points.csv");
+        
 
-        // debug output
-        for (auto [x, y] : coords)
-            std::println("x = {}, y = {}.", x, y);
     }
     catch (const parse_error& e) 
     {

@@ -14,8 +14,8 @@ auto parse_line(const std::string& line, std::size_t lineno) -> std::pair<double
     auto parse_double = [&](std::string_view sv)
     {
         double value{};
-        auto* begin = sv.data();
-        auto* end = sv.data() + sv.size();
+        const auto* begin = sv.data();
+        const auto* end = sv.data() + sv.size();
         auto  res = std::from_chars(begin, end, value);
         
         if (res.ec != std::errc() || res.ptr != end) 
@@ -29,7 +29,7 @@ auto parse_line(const std::string& line, std::size_t lineno) -> std::pair<double
     return {x, y};
 }
 
-std::vector<std::pair<double,double>> read_csv_coords(const std::filesystem::path& file)
+auto read_csv_coords(const std::filesystem::path& file) -> std::vector<std::pair<double,double>>
 {
     std::ifstream fin(file);
     if (!fin.is_open())

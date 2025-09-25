@@ -4,7 +4,8 @@
 
 #include <fstream>
 
-TEST_CASE("CSV parser reads double,double correctly", "[csv]") {
+TEST_CASE("CSV parser reads double,double correctly", "[csv]") 
+{
     std::filesystem::path tmpfile = "test.csv";
 
     std::ofstream ofs(tmpfile);
@@ -15,15 +16,16 @@ TEST_CASE("CSV parser reads double,double correctly", "[csv]") {
 
     auto coords = read_csv_coords(tmpfile);
     REQUIRE(coords.size() == 2);
-    CHECK(coords[0].first == Catch::Approx(1.0));
+    CHECK(coords[0].first  == Catch::Approx(1.0));
     CHECK(coords[0].second == Catch::Approx(2.0));
-    CHECK(coords[1].first == Catch::Approx(3.5));
+    CHECK(coords[1].first  == Catch::Approx(3.5));
     CHECK(coords[1].second == Catch::Approx(4.5));
 
     std::filesystem::remove(tmpfile);
 }
 
-TEST_CASE("CSV parser throws on invalid line", "[csv]") {
+TEST_CASE("CSV parser throws on invalid line", "[csv]") 
+{
     std::filesystem::path tmpfile = "bad.csv";
 
     std::ofstream ofs(tmpfile);
