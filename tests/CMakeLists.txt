@@ -12,10 +12,10 @@ endif()
 
 add_executable(parser test_parser.cpp)
 
-target_compile_features(delaunay PRIVATE cxx_std_23)
+target_compile_features(parser PRIVATE cxx_std_23)
 
-set_target_properties(delaunay PROPERTIES
-    RUNTIME_OUTPUT_DIRECTORY "${CMAKE_BINARY_DIR}/bin"
+set_target_properties(parser PROPERTIES
+    RUNTIME_OUTPUT_DIRECTORY "${CMAKE_BINARY_DIR}/test/bin"
     CXX_EXTENSIONS OFF
 )
 
