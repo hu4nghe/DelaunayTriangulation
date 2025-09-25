@@ -6,7 +6,7 @@ set(CMAKE_CXX_EXTENSIONS OFF)
 add_subdirectory(modules/csv_parser)
 add_subdirectory(modules/delaunay)
 
-option(build_tests "Build lockfree_queue tests" OFF)
+option(build_tests "Build lockfree_queue tests" ON)
 
 if(build_tests)
     enable_testing()
