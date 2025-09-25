@@ -6,8 +6,18 @@ set(CMAKE_C_STANDARD_REQUIRED ON)
 set(CMAKE_C_EXTENSIONS OFF)
 
 add_library(Graph STATIC src/Graph.c)
-
 add_executable(DelaunayExecutable src/Delaunay.c)
+
+target_compile_features(DelaunayExecutable PRIVATE c_std_23)
+
+set_target_properties(DelaunayExecutable PROPERTIES
+    RUNTIME_OUTPUT_DIRECTORY "${CMAKE_BINARY_DIR}/bin"
+    ARCHIVE_OUTPUT_DIRECTORY "${CMAKE_BINARY_DIR}/lib"
+    LIBRARY_OUTPUT_DIRECTORY "${CMAKE_BINARY_DIR}/lib"
+    C_STANDARD_REQUIRED ON
+    C_EXTENSIONS OFF
+)
+
 
 target_link_libraries(DelaunayExecutable PRIVATE Graph)
 
