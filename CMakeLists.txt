@@ -12,8 +12,6 @@ target_compile_features(DelaunayExecutable PRIVATE c_std_23)
 
 set_target_properties(DelaunayExecutable PROPERTIES
     RUNTIME_OUTPUT_DIRECTORY "${CMAKE_BINARY_DIR}/bin"
-    ARCHIVE_OUTPUT_DIRECTORY "${CMAKE_BINARY_DIR}/lib"
-    LIBRARY_OUTPUT_DIRECTORY "${CMAKE_BINARY_DIR}/lib"
     C_STANDARD_REQUIRED ON
     C_EXTENSIONS OFF
 )
@@ -27,3 +25,5 @@ target_include_directories(DelaunayExecutable PRIVATE ${CMAKE_CURRENT_SOURCE_DIR
 if(UNIX)
     target_link_libraries(DelaunayExecutable PRIVATE m)
 endif()
+
+add_subdirectory(modules/csv_parser)
