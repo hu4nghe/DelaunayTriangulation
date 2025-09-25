@@ -33,5 +33,5 @@
 
 /build
 /bin
-/.vscode
-/.cache
+**/.vscode
+**/.cache/
