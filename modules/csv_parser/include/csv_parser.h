@@ -1,6 +1,11 @@
 #include <filesystem>
 #include <vector>
 
+struct parse_error : std::runtime_error 
+{
+    using std::runtime_error::runtime_error;
+};
+
 /**
  * @brief Parse a csv file into vector cordinate (double, double)
  * 

@@ -3,11 +3,6 @@
 
 #include "csv_parser.h"
 
-struct parse_error : std::runtime_error 
-{
-    using std::runtime_error::runtime_error;
-};
-
 auto parse_line(const std::string& line, std::size_t lineno) -> std::pair<double,double> 
 {
     auto comma_pos = line.find(',');
@@ -42,6 +37,11 @@ std::vector<std::pair<double,double>> read_csv_coords(const std::filesystem::pat
     std::vector<std::pair<double,double>> coords;
     std::string line;
     std::size_t lineno{};
+    
+    // skip the header 
+    if (!std::getline(fin, line))
+        throw std::runtime_error("Empty CSV file: " + file.string());
+    ++lineno;
 
     while (std::getline(fin, line)) 
     {
