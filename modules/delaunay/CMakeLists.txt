@@ -7,7 +7,7 @@ FetchContent_Declare(
 )
 FetchContent_MakeAvailable(geometry_tool)
 
-add_executable(delaunay src/delaunay.cpp)
+add_library(delaunay STATIC src/delaunay.cpp)
 
 target_link_libraries(delaunay
     PRIVATE
@@ -18,6 +18,11 @@ target_link_libraries(delaunay
 target_compile_features(delaunay PRIVATE cxx_std_23)
 
 set_target_properties(delaunay PROPERTIES
-    RUNTIME_OUTPUT_DIRECTORY "${CMAKE_BINARY_DIR}/bin"
+    RUNTIME_OUTPUT_DIRECTORY "${CMAKE_BINARY_DIR}/lib"
     CXX_EXTENSIONS OFF
 )
+target_include_directories(delaunay
+    PUBLIC 
+        $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/include>
+        $<INSTALL_INTERFACE:include>
+)   
