@@ -98,14 +98,14 @@ TEST_CASE("Square", "[delaunay][square]")
     REQUIRE(satisfies_empty_circle(pts, triangles));
 }
 
-TEST_CASE("Ramdom cloud", "[delaunay][random_cloud]") 
+TEST_CASE("Random cloud", "[delaunay][random_cloud]") 
 {
-    auto pts = random_cloud(500, 2025);
+    auto pts = random_cloud(50000, 2025);
     auto triangles = delaunay_triangulate(pts);
     REQUIRE(satisfies_empty_circle(pts, triangles));
 }
 
-TEST_CASE("Benchmark: medium point set triangulation", "[delaunay][benchmark]") 
+TEST_CASE("Random cloud Benchmark", "[delaunay][benchmark]") 
 {
     auto pts = random_cloud(500, 2025);
     BENCHMARK("delaunay_triangulate 500 points") 
