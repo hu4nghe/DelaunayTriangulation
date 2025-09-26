@@ -9,11 +9,11 @@
  * 
  */
 #include "csv_parser.h"
-#include "geo_2D/triangle_2D.h"
+#include "delaunay.h"
 
 #include <ranges>
 #include <functional>
-#include <unordered_set>
+#include <set>
 
 auto super_triangle(const std::vector<tools_2D::point>& points) 
 {
@@ -32,7 +32,7 @@ auto super_triangle(const std::vector<tools_2D::point>& points)
     return std::tuple(a, b, c);
 }
 
-auto delaunay_triangulate(const std::vector<tools_2D::point>& points) 
+auto delaunay_triangulate(const std::vector<tools_2D::point>& points) -> std::vector<tools_2D::triangle>
 {    
     // Construct a super tools_2D::triangle at first.
     auto [p1, p2, p3] = super_triangle(points);
@@ -40,24 +40,24 @@ auto delaunay_triangulate(const std::vector<tools_2D::point>& points)
 
     for (const auto& p : points) 
     {
-        std::unordered_set<tools_2D::segment> polygon;
+        std::set<tools_2D::segment> polygon;
         std::erase_if(
             all_triangles, 
             [&](const tools_2D::triangle& tri)
             {
                 if (tri.circum_circle().contains(p))
                 {
-                    for (const auto& e : tri.get_edges()) 
-                        if (!polygon.erase(e)) 
-                            polygon.insert(e);
+                    for (const auto& edge : tri.get_edges()) 
+                        if (!polygon.erase(edge)) 
+                            polygon.insert(edge);
                     return true;
                 }
                 return false;             
             });
                          
         //construct new triangles with current tools_2D::point and segments.                                
-        for (const auto& e : polygon)
-            all_triangles.emplace_back(p, e);
+        for (const auto& edge : polygon)
+            all_triangles.emplace_back(p, edge);
             
     }
 
@@ -75,7 +75,7 @@ auto delaunay_triangulate(const std::vector<tools_2D::point>& points)
     return all_triangles;
 }
 
-int main()
+auto read_and_triangulate() -> std::vector<tools_2D::triangle>
 {
     auto coords = read_csv_coords("points.csv");
     if (coords.size() <= 3) 
@@ -85,7 +85,5 @@ int main()
     for(const auto [x, y] : coords)
         points.emplace_back(x, y);
 
-    auto result = delaunay_triangulate(points);
-
-    return 0;   
+    return delaunay_triangulate(points);   
 }
