@@ -68,15 +68,17 @@ std::vector<tools_2D::point> with_duplicates()
 std::vector<tools_2D::point> random_cloud(int n, unsigned seed = 42) 
 {
     std::mt19937 rng(seed);
-    std::uniform_real_distribution<double> dist(-1.0, 1.0);
-    std::vector<tools_2D::point> pts; pts.reserve(n);
-    for (int i = 0; i < n; ++i) pts.push_back({dist(rng), dist(rng)});
+    std::uniform_real_distribution<double> dist(-10.0, 10.0);
+    std::vector<tools_2D::point> pts; 
+    pts.reserve(n);
+    for (int i = 0; i < n; ++i) 
+        pts.push_back({dist(rng), dist(rng)});
     return pts;
 }
 
 // ---------- Tests ----------
 
-TEST_CASE("Basic: three points form a single triangle", "[delaunay][basic]") 
+TEST_CASE("Basic", "[delaunay][basic]") 
 {
     auto pts = three_points_triangle();
     auto triangles = delaunay_triangulate(pts);
@@ -86,7 +88,7 @@ TEST_CASE("Basic: three points form a single triangle", "[delaunay][basic]")
     REQUIRE(satisfies_empty_circle(pts, triangles));
 }
 
-TEST_CASE("Square: diagonal chooses Delaunay (maximizes minimum angle)", "[delaunay][square]") 
+TEST_CASE("Square", "[delaunay][square]") 
 {
     auto pts = square_4();
     auto triangles = delaunay_triangulate(pts);
@@ -96,10 +98,18 @@ TEST_CASE("Square: diagonal chooses Delaunay (maximizes minimum angle)", "[delau
     REQUIRE(satisfies_empty_circle(pts, triangles));
 }
 
-TEST_CASE("Benchmark: medium point set triangulation", "[delaunay][!benchmark]") 
+TEST_CASE("Ramdom cloud", "[delaunay][random_cloud]") 
 {
     auto pts = random_cloud(500, 2025);
-    BENCHMARK("delaunay_triangulate 500 points") {
+    auto triangles = delaunay_triangulate(pts);
+    REQUIRE(satisfies_empty_circle(pts, triangles));
+}
+
+TEST_CASE("Benchmark: medium point set triangulation", "[delaunay][benchmark]") 
+{
+    auto pts = random_cloud(500, 2025);
+    BENCHMARK("delaunay_triangulate 500 points") 
+    {
         return delaunay_triangulate(pts);
     };
 }

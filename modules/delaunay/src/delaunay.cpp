@@ -15,21 +15,26 @@
 #include <functional>
 #include <set>
 
-auto super_triangle(const std::vector<tools_2D::point>& points) 
+auto super_triangle(const std::vector<tools_2D::point>& points)
 {
     auto [min_x, max_x] = std::ranges::minmax(points | std::views::transform(std::mem_fn(&tools_2D::point::get_x)));
-    auto [min_y, max_y] = std::ranges::minmax(points | std::views::transform(std::mem_fn(&tools_2D::point::get_x)));
+    auto [min_y, max_y] = std::ranges::minmax(points | std::views::transform(std::mem_fn(&tools_2D::point::get_y)));
 
-    double avg_x = (min_x + max_x) / 2.0;
-    const tools_2D::point p1(avg_x, max_y);
-    const tools_2D::point p2(max_x, min_y);
-    double k = p1.slope(p2);
+    double cx = (min_x + max_x) / 2.0;
+    double cy = (min_y + max_y) / 2.0;
+    double L  = std::max(max_x - min_x, max_y - min_y);
 
-    const tools_2D::point a(avg_x,                               max_y - k * avg_x);
-    const tools_2D::point b(max_x + (min_y - max_y - 1) / k + 1, min_y - 1);
-    const tools_2D::point c(2 * avg_x - b.get_x(),               min_y - 1); 
+    double alpha = 20.0;
+    double S = std::max(1.0, alpha * L);
 
-    return std::tuple(a, b, c);
+    tools_2D::point bl(cx - S/2.0, cy - S/2.0); // bottom-left
+    tools_2D::point br(cx + S/2.0, cy - S/2.0); // bottom-right
+    tools_2D::point tl(cx - S/2.0, cy + S/2.0); // top-left
+    tools_2D::point tr(cx + S/2.0, cy + S/2.0); // top-right
+
+    tools_2D::point top_mid(cx, cy + S/2.0);
+
+    return std::tuple(bl, br, top_mid);
 }
 
 auto delaunay_triangulate(const std::vector<tools_2D::point>& points) -> std::vector<tools_2D::triangle>
