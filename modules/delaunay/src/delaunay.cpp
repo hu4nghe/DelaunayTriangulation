@@ -13,39 +13,37 @@
 
 #include <ranges>
 #include <functional>
-#include <set>
+#include <unordered_set>
 
-using namespace tools_2D;
-
-auto super_triangle(const std::vector<point>& points) 
+auto super_triangle(const std::vector<tools_2D::point>& points) 
 {
-    auto [min_x, max_x] = std::ranges::minmax(points | std::views::transform(std::mem_fn(&point::get_x)));
-    auto [min_y, max_y] = std::ranges::minmax(points | std::views::transform(std::mem_fn(&point::get_x)));
+    auto [min_x, max_x] = std::ranges::minmax(points | std::views::transform(std::mem_fn(&tools_2D::point::get_x)));
+    auto [min_y, max_y] = std::ranges::minmax(points | std::views::transform(std::mem_fn(&tools_2D::point::get_x)));
 
     double avg_x = (min_x + max_x) / 2.0;
-    const point p1(avg_x, max_y);
-    const point p2(max_x, min_y);
+    const tools_2D::point p1(avg_x, max_y);
+    const tools_2D::point p2(max_x, min_y);
     double k = p1.slope(p2);
 
-    const point a(avg_x,                               max_y - k * avg_x);
-    const point b(max_x + (min_y - max_y - 1) / k + 1, min_y - 1);
-    const point c(2 * avg_x - b.get_x(),               min_y - 1); 
+    const tools_2D::point a(avg_x,                               max_y - k * avg_x);
+    const tools_2D::point b(max_x + (min_y - max_y - 1) / k + 1, min_y - 1);
+    const tools_2D::point c(2 * avg_x - b.get_x(),               min_y - 1); 
 
     return std::tuple(a, b, c);
 }
 
-auto delaunay_triangulate(const std::vector<point>& points) 
+auto delaunay_triangulate(const std::vector<tools_2D::point>& points) 
 {    
-    // Construct a super triangle at first.
+    // Construct a super tools_2D::triangle at first.
     auto [p1, p2, p3] = super_triangle(points);
-    std::vector<triangle> all_triangles{triangle(p1, p2, p3)};
+    std::vector<tools_2D::triangle> all_triangles{tools_2D::triangle{p1, p2, p3}};
 
     for (const auto& p : points) 
     {
-        std::set<segment> polygon;
+        std::unordered_set<tools_2D::segment> polygon;
         std::erase_if(
             all_triangles, 
-            [&](const triangle& tri)
+            [&](const tools_2D::triangle& tri)
             {
                 if (tri.circum_circle().contains(p))
                 {
@@ -57,16 +55,16 @@ auto delaunay_triangulate(const std::vector<point>& points)
                 return false;             
             });
                          
-        //construct new triangles with current point and segments.                                
+        //construct new triangles with current tools_2D::point and segments.                                
         for (const auto& e : polygon)
             all_triangles.emplace_back(p, e);
             
     }
 
-    // Remove triangles that contain any of the super triangle vertices.
+    // Remove triangles that contain any of the super tools_2D::triangle vertices.
     std::erase_if(
         all_triangles,
-        [&](const triangle& tri) 
+        [&](const tools_2D::triangle& tri) 
         {
             for (const auto& p : {p1, p2, p3})
                 if(tri.containsVertex(p)) 
@@ -83,7 +81,7 @@ int main()
     if (coords.size() <= 3) 
         throw std::invalid_argument("At least 4 points are required for triangulation.");
 
-    std::vector<point> points;
+    std::vector<tools_2D::point> points;
     for(const auto [x, y] : coords)
         points.emplace_back(x, y);
 
