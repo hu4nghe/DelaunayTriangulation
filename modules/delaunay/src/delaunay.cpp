@@ -35,10 +35,7 @@ auto super_triangle(const std::vector<point>& points)
 }
 
 auto delaunay_triangulate(const std::vector<point>& points) 
-{
-    if (points.size() <= 3) 
-        throw std::invalid_argument("At least 4 points are required for triangulation.");
-
+{    
     // Construct a super triangle at first.
     auto [p1, p2, p3] = super_triangle(points);
     std::vector<triangle> all_triangles{triangle(p1, p2, p3)};
@@ -83,6 +80,9 @@ auto delaunay_triangulate(const std::vector<point>& points)
 int main()
 {
     auto coords = read_csv_coords("points.csv");
+    if (coords.size() <= 3) 
+        throw std::invalid_argument("At least 4 points are required for triangulation.");
+
     std::vector<point> points;
     for(const auto [x, y] : coords)
         points.emplace_back(x, y);
